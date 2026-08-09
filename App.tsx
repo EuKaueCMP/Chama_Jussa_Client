@@ -1,9 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { Login } from './src/pages/Login/Login';
+import { Montserrat_400Regular, Montserrat_600SemiBold, Montserrat_700Bold, useFonts } from '@expo-google-fonts/montserrat'
+import Login from './src/app/login';
 
 export default function App() {
+  const [loaded] = useFonts({
+    Montserrat_400Regular,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold
+  })
+
+  if (!loaded)
+    return null;
+  
   return (
     // SafeAreaProvider -> calcular o tamanho das extremidades (topo e rodape)
     <SafeAreaProvider>
@@ -11,7 +21,7 @@ export default function App() {
       <SafeAreaView style={styles.safeAreaView}>
         {/* <StatusBar style='dark'/>
         <StatusBar style='light'/> */}
-        <StatusBar style='auto'/>
+        <StatusBar style='auto' />
         <Login />
       </SafeAreaView>
     </SafeAreaProvider>
