@@ -1,81 +1,24 @@
-import { FlatList, Pressable, Text, View } from "react-native"
-
-const notificacoes = [
-    {
-        id: "1",
-        titulo: "Ordem de Serviço finalizada",
-        descricao: "Sua OS foi finalizada, logo ela voltará para sua sala.",
-        data: '22/06/2026',
-        hora: '15:02:55'
-    },
-    {
-        id: "2",
-        titulo: "Ordem de Serviço finalizada",
-        descricao: "Sua OS foi finalizada, logo ela voltará para sua sala.",
-        data: '22/06/2026',
-        hora: '15:02:55'
-    },
-    {
-        id: "3",
-        titulo: "Ordem de Serviço finalizada",
-        descricao: "Sua OS foi finalizada, logo ela voltará para sua sala.",
-        data: '22/06/2026',
-        hora: '15:02:55'
-
-    },
-    {
-        id: "4",
-        titulo: "Ordem de Serviço finalizada",
-        descricao: "Sua OS foi finalizada, logo ela voltará para sua sala.",
-        data: '22/06/2026',
-        hora: '15:02:55'
-    },
-    {
-        id: "5",
-        titulo: "Ordem de Serviço finalizada",
-        descricao: "Sua OS foi finalizada, logo ela voltará para sua sala.",
-        data: '23/06/2026',
-        hora: '15:02:55'
-    },
-    {
-        id: "6",
-        titulo: "Ordem de Serviço finalizada",
-        descricao: "Sua OS foi finalizada, logo ela voltará para sua sala.",
-        data: '23/06/2026',
-        hora: '15:02:55'
-    },
-    {
-        id: "7",
-        titulo: "Ordem de Serviço finalizada",
-        descricao: "Sua OS foi finalizada, logo ela voltará para sua sala.",
-        data: '23/06/2026',
-        hora: '15:02:55'
-    },
-]
+import { SafeAreaView } from "react-native-safe-area-context";
+import { styles } from "./notificacoes.style"
+import { Text, ScrollView } from "react-native";
+import CardNotificacao from "../../../components/cardNotificacao/cardNotificacao";
 
 export default function Notificacoes() {
-    return (
-        <View>
-            <Text>Notificações</Text>
-            <FlatList
-                data={notificacoes}
-                keyExtractor={(item) => item.id}
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item }) => (
-                    <Pressable>
-                        <View>
-                            <Text>Icon</Text>
-                        </View>
-                        <View>
-                            <Text>{item.titulo}</Text>
-                            <Text>{item.descricao}</Text>
-                            <View>
-                                <Text>{item.data}</Text>
-                                <Text>{item.hora}</Text>
-                            </View>
-                        </View>
-                    </Pressable>
-                )} />
-        </View>
-    )
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <Text style={styles.headerTitle}>Notificações</Text>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+        style={styles.scrollView}>
+        <CardNotificacao/>
+        <CardNotificacao/>
+        <CardNotificacao/>
+        <CardNotificacao/>
+        <CardNotificacao/>
+        <CardNotificacao/>
+        <CardNotificacao/>
+      </ScrollView>
+    </SafeAreaView>
+  )
 }
