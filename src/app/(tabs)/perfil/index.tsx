@@ -1,8 +1,16 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import { styles } from "./perfil.style"
+import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Perfil() {
+  const router = useRouter();
+  async function signout() {
+    AsyncStorage.clear();
+    router.replace("/login")
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -20,7 +28,7 @@ export default function Perfil() {
         </View>
 
         {/* Botão de Sair da Conta */}
-        <TouchableOpacity
+        <TouchableOpacity onPress={() => signout()}
           style={styles.logoutButton}
           activeOpacity={0.8}
         >
