@@ -1,85 +1,13 @@
 import { Alert, FlatList, Pressable, Text, TouchableOpacity, View } from "react-native"
 import { styles } from "./listaOs.styles"
 import { useState } from "react";
-
-const ordens = [
-    {
-        id: "1",
-        numero: "OS-001",
-        status: "Aberta",
-        titulo: "Vazamento hidráulico no Bloco B",
-        descricao:
-            "Há um vazamento constante de água por baixo da pia do banheiro masculino do segundo andar...",
-    },
-    {
-        id: "2",
-        numero: "OS-002",
-        status: "Em Andamento",
-        titulo: "Computador sem internet",
-        descricao:
-            "O computador do laboratório 4 não está conseguindo acessar a internet.",
-    },
-    {
-        id: "3",
-        numero: "OS-003",
-        status: "Concluída",
-        titulo: "Projetor queimado",
-        descricao:
-            "Foi realizada a troca da lâmpada do projetor.",
-    },
-    {
-        id: "4",
-        numero: "OS-003",
-        status: "Concluída",
-        titulo: "Projetor queimado",
-        descricao:
-            "Foi realizada a troca da lâmpada do projetor.",
-    },
-    {
-        id: "5",
-        numero: "OS-003",
-        status: "Concluída",
-        titulo: "Projetor queimado",
-        descricao:
-            "Foi realizada a troca da lâmpada do projetor.",
-    },
-    {
-        id: "6",
-        numero: "OS-003",
-        status: "Concluída",
-        titulo: "Projetor queimado",
-        descricao:
-            "Foi realizada a troca da lâmpada do projetor.",
-    },
-    {
-        id: "7",
-        numero: "OS-003",
-        status: "Concluída",
-        titulo: "Projetor queimado",
-        descricao:
-            "Foi realizada a troca da lâmpada do projetor.",
-    },
-    {
-        id: "8",
-        numero: "OS-003",
-        status: "Concluída",
-        titulo: "Projetor queimado",
-        descricao:
-            "Foi realizada a troca da lâmpada do projetor.",
-    },
-];
+import { useOrdemServico } from "../../../hooks/useOrdemServico";
+import CardOs from "../../../components/cardOs";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // export const ListaOs = () => {
 export default function ListaOs() {
-    const [listaOs, setListaOs] = useState(ordens);
-
-    const filtrar = (status: string) => {
-        let listaFiltrada = ordens;
-
-        status == 'todos' ? listaFiltrada = ordens : listaFiltrada = ordens, listaFiltrada = listaFiltrada.filter(l => l.status.toLowerCase().includes(status))
-
-        setListaOs(listaFiltrada);
-    }
+    const os = useOrdemServico();
 
     return (
         <>
@@ -96,56 +24,33 @@ export default function ListaOs() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.filtros}>
-                    <Pressable style={styles.filterbtn} onPress={() => {
-                        filtrar('todos');
-                    }}>
+                    <Pressable style={styles.filterbtn}>
                         <Text style={styles.filterbtntxt}>Todos</Text>
                     </Pressable>
-                    <Pressable style={styles.filterbtn} onPress={() => {
-                        filtrar("aberta");
-                    }}>
+                    <Pressable style={styles.filterbtn}>
                         <Text style={styles.filterbtntxt}>Aberto</Text>
                     </Pressable>
-                    <Pressable style={styles.filterbtn} onPress={() => {
-                        filtrar("em andamento");
-                    }}>
+                    <Pressable style={styles.filterbtn}>
                         <Text style={styles.filterbtntxt}>Em Andamento</Text>
                     </Pressable>
-                    <Pressable style={styles.filterbtn} onPress={() => {
-                        filtrar("concluída")
-                    }}>
+                    <Pressable style={styles.filterbtn}>
                         <Text style={styles.filterbtntxt}>Concluídas</Text>
                     </Pressable>
                 </View>
                 <FlatList
-                    data={listaOs}
-                    keyExtractor={(item) => item.id}
+                    data={os}
+                    keyExtractor={(item) => String(item.osId)}
                     showsVerticalScrollIndicator={false}
                     renderItem={({ item }) => (
                         //card:
-                        <Pressable
-                            style={({ pressed }) => [
-                                styles.card,
-                                pressed && styles.cardPressed,
-                            ]}
-                        >
-                            <View style={styles.cardTopo}>
-                                <Text style={styles.numero}>{item.numero}</Text>
-
-                                <View style={styles.statusContainer}>
-                                    <Text style={styles.status}>{item.status}</Text>
-                                </View>
-                            </View>
-
-                            <Text style={styles.tituloCard}>{item.titulo}</Text>
-
-                            <Text style={styles.descricao} numberOfLines={3}>
-                                {item.descricao}
-                            </Text>
-                        </Pressable>
+                        <CardOs
+                            numOs={item.osId}
+                            status={item.statusNome}
+                            titulo={item.nomeItem}
+                            descricao={item.descricao}
+                        />
                     )}
                 />
-
             </View >
         </>
     )
