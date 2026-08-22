@@ -1,7 +1,7 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./notificacoes.style"
 import { Text, ScrollView } from "react-native";
-import CardNotificacao from "../../../components/cardNotificacao/cardNotificacao";
+import CardNotificacao from "../../../components/cardNotificacao";
 
 export default function Notificacoes() {
   return (

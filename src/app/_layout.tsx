@@ -1,5 +1,7 @@
 import { Montserrat_400Regular, Montserrat_600SemiBold, Montserrat_700Bold, useFonts } from '@expo-google-fonts/montserrat';
 import { Stack } from 'expo-router'
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const RootLayout = () => {
     const [loaded] = useFonts({
@@ -13,22 +15,32 @@ const RootLayout = () => {
     }
 
     return (
-        <Stack>
-            {/* stack.screen -> cada item da pilha/cada tela */}
-            {/* name -> o nome da pasta da tela */}
-            <Stack.Screen
-                name="login/index"
-                options={{
-                    title: "Login",
-                    headerShown: false
-                }} />
-            <Stack.Screen
-                name="(tabs)"
-                options={{
-                    title: "Lista de OS"
-                }}
-            />
-        </Stack>
+        <SafeAreaProvider>
+            <StatusBar style="dark" />
+            <Stack>
+                <Stack.Screen
+                    name="login/index"
+                    options={{
+                        title: "login",
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="detalhesOs/[id]"
+                    options={{
+                        title: "Detalhes da OS",
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="(tabs)"
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+
+            </Stack>
+        </SafeAreaProvider>
     )
 }
 
