@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, View } from "react-native"
 import { Image } from 'expo-image'
 
-const index = () => {
+export default function DetalhesOs() {
   return (
     <View>
       <Text>Detalhe da OS-X</Text>
@@ -30,7 +30,7 @@ const index = () => {
           </View>
           <View>
             <Text>Foto do problema</Text>
-            <Image source={require('fotoImagem')} />
+            <Image source={require('../../../assets/imgs/logo.svg')} />
           </View>
         </View>
       </View>
@@ -40,5 +40,3 @@ const index = () => {
     </View>
   )
 }
-
-export default index

@@ -53,7 +53,7 @@ const notificacoes = [
     },
 ]
 
-const Notificacoes = () => {
+export default function Notificacoes() {
     return (
         <View>
             <Text>Notificações</Text>
@@ -79,5 +79,3 @@ const Notificacoes = () => {
         </View>
     )
 }
-
-export default Notificacoes;

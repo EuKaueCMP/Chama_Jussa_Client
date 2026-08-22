@@ -1,12 +1,13 @@
 import { Text, TouchableOpacity, View } from "react-native"
 import { Image } from "expo-image";
-const Perfil = () => {
+
+export default function Perfil() {
     return (
         <View>
             <Text>Perfil</Text>
             <View>
                 <View>
-                    <Image source={require('imagem do perfil')} />
+                    <Image source={require('../../../../assets/imgs/logo.svg')} />
                     <View>
                         <Text>Késsia milena</Text>
                         <Text>kessia@email.com</Text>
@@ -20,4 +21,3 @@ const Perfil = () => {
     )
 }
 
-export default Perfil;

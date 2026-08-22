@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../../contants/theme";
+import { Colors } from "../../../constants/theme";
 
 export const styles = StyleSheet.create({
     container: {
@@ -70,15 +70,17 @@ export const styles = StyleSheet.create({
 
         marginBottom: 18,
 
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.16,
-        shadowRadius: 5,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 4,
+        // },
+        // shadowOpacity: 0.16,
+        // shadowRadius: 5,
 
-        elevation: 5,
+        // elevation: 5,
+
+        boxShadow: '0 2px 3px rgba(0, 0, 0, 0.3)'
     },
 
     cardPressed: {

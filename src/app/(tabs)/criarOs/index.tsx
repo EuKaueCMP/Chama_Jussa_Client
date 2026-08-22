@@ -1,6 +1,6 @@
 import { Text, TextInput, TouchableOpacity, View } from "react-native"
 
-const index = () => {
+export default function CriarOs() {
     return (
         <View>
             <Text>Criar ordem de serviço</Text>
@@ -32,5 +32,3 @@ const index = () => {
         </View>
     )
 }
-
-export default index

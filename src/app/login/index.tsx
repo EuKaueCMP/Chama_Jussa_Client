@@ -1,17 +1,31 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { Image } from "expo-image"
 import { useRouter } from "expo-router";
+import { autenticacaoSerive } from "../../services/autenticacaoService";
 
-const Login = () => {
+export default function Login() {
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+
     const router = useRouter();
 
-    function acessar() {
-        router.push("/listaOs");
-    }
+    async function acessar() {
+        const emailDigitado = email.trim();
+        const senhaDigitada = senha.trim();
 
-    const [email, useEmail] = useState("");
-    const [senha, useSenha] = useState("");
+        if (!emailDigitado || !senhaDigitada) {
+            Alert.alert("Por favor, preencha todos os campos!")
+            return;
+        }
+
+        try {
+            await autenticacaoSerive.login({ email: emailDigitado, senha: senhaDigitada })
+            router.replace("/(tabs)/listaOs");
+        } catch (error) {
+            Alert.alert("Erro, E-mail ou senha inválidos!")
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -24,15 +38,22 @@ const Login = () => {
                 <View style={styles.container_inputs}>
                     <View>
                         <Text style={styles.input_label}>E-mail</Text>
-                        <TextInput textContentType="emailAddress" placeholder="email@email.com" style={styles.text_input} onChangeText={currentMail => useEmail(currentMail)} />
+                        <TextInput style={styles.text_input}
+                            placeholder="email@email.com"
+                            value={email}
+                            textContentType="emailAddress"
+                            onChangeText={setEmail} />
                     </View>
-
                     <View>
                         <Text style={styles.input_label}>Senha</Text>
-                        <TextInput placeholder="Digite sua senha" textContentType="password" style={styles.text_input} onChangeText={currentPass => useSenha(currentPass)} />
+                        <TextInput style={styles.text_input}
+                            placeholder="Digite sua senha"
+                            secureTextEntry
+                            value={senha}
+                            textContentType="password"
+                            onChangeText={setSenha} />
                     </View>
                 </View>
-
                 <TouchableOpacity style={styles.btn_login} onPress={acessar}>
                     <Text style={{ 'fontWeight': '600', color: '#fff', fontFamily: 'Montserrat_600SemiBold' }}>Acessar o sistema</Text>
                 </TouchableOpacity>
@@ -40,8 +61,6 @@ const Login = () => {
         </View >
     )
 }
-
-export default Login;
 
 const styles = StyleSheet.create({
     container: {
