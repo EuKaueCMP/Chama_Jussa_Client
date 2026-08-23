@@ -3,8 +3,11 @@ import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "reac
 import { Image } from "expo-image"
 import { useRouter } from "expo-router";
 import { autenticacaoSerive } from "../../services/autenticacaoService";
+import { useAuth } from "../../hooks/useAuth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
+    const { login } = useAuth();
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
@@ -20,9 +23,21 @@ export default function Login() {
         }
 
         try {
-            await autenticacaoSerive.login({ email: emailDigitado, senha: senhaDigitada })
+            const response = await autenticacaoSerive.login({ email: emailDigitado, senha: senhaDigitada })
+
+            if (response && response.token)
+                await login(response.token)
+
             router.replace("/(tabs)/listaOs");
-        } catch (error) {
+        } catch (error: any) {
+            const mensagemErro =
+                error.response?.data?.header?.message ||
+                error.response?.data?.message ||
+                error.response?.data ||
+                error.message ||
+                "deu erro aqui na login"
+
+            console.log(mensagemErro);
             Alert.alert("Erro, E-mail ou senha inválidos!")
         }
     }

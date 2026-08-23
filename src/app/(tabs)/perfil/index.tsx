@@ -3,11 +3,17 @@ import { Text, View, Image, TouchableOpacity } from "react-native";
 import { styles } from "./perfil.style"
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from "../../../hooks/useAuth";
+import ImgUsuario from "../../../components/imgUsuario";
 
 export default function Perfil() {
   const router = useRouter();
+  const { usuario, logout } = useAuth();
+
+  console.log("dados do usuario logado: ", usuario)
+
   async function signout() {
-    AsyncStorage.clear();
+    logout();
     router.replace("/login")
   }
 
@@ -19,12 +25,9 @@ export default function Perfil() {
 
         {/* Card de Informações do Usuário */}
         <View style={styles.card}>
-          <Image
-            source={require("../../../../assets/imgs/usuario.png")} // Substitua pela foto de perfil real
-            style={styles.avatar}
-          />
-          <Text style={styles.userName}>Késsia Milena</Text>
-          <Text style={styles.userEmail}>kessia@emai.com</Text>
+          <ImgUsuario />
+          <Text style={styles.userName}>{usuario?.nome}</Text>
+          <Text style={styles.userEmail}>{usuario?.email}</Text>
         </View>
 
         {/* Botão de Sair da Conta */}

@@ -34,13 +34,6 @@ export const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 3,
   },
-  avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 65,
-    backgroundColor: '#E0E0E0',
-    marginBottom: 20,
-  },
   userName: {
     fontSize: 20,
     fontWeight: 'bold',
